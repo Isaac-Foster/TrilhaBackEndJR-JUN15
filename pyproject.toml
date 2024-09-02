@@ -1,0 +1,41 @@
+[tool.poetry]
+name = "todo"
+version = "0.1.0"
+description = ""
+authors = ["Isack Vitor <isack200961@hotmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.111.0"
+sqlalchemy = "^2.0.31"
+bcrypt = "^4.1.3"
+python-multipart = "^0.0.9"
+pyjwt = "^2.8.0"
+
+[tool.poetry.group.dev.dependencies]
+taskipy = "^1.13.0"
+ruff = "^0.5.1"
+
+[tool.ruff]
+line-length = 79
+extend-exclude = ['migrations']
+
+[tool.ruff.lint]
+preview = true
+select = ["I", "F", "E", "W", "PL", "PT"]
+
+[tools.ruff.format]
+preview = true
+
+
+[tool.taskipy.tasks]
+dev = "fastapi dev app"
+run = "uvicorn app:app --reload"
+lint = "ruff check . && ruff . --diff"
+format = "ruff check . --fix && ruff format ."
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
